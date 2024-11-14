@@ -25,6 +25,10 @@ private slots:
     void onModificarLibro();
     void onEliminarLibro();
     void actualizarLibro(int fila, const libro &libro);
+    void filtrarLibros();
+    void mostrarTodosLosLibros();
+    void guardarEnCSV();
+    void cargarDesdeCSV();
 
 private:
     Ui::MainWindow *ui;

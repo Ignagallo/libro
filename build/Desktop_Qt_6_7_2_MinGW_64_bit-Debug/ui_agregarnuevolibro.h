@@ -57,6 +57,7 @@ public:
         formLayoutWidget->setGeometry(QRect(40, 50, 321, 301));
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName("formLayout");
+        formLayout->setSizeConstraint(QLayout::SizeConstraint::SetMinimumSize);
         formLayout->setContentsMargins(0, 0, 0, 0);
         label = new QLabel(formLayoutWidget);
         label->setObjectName("label");

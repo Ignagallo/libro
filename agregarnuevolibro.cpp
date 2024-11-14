@@ -21,8 +21,10 @@ agregarnuevolibro::~agregarnuevolibro()
 
 QString agregarnuevolibro::getTitulo() const { return ui->campoTitulo->text(); }
 QString agregarnuevolibro::getAutor() const { return ui->campoAutor->text(); }
+QString agregarnuevolibro::getGenero() const { return ui->campoGenero->text(); }
 QString agregarnuevolibro::getEditorial() const { return ui->campoEditorial->text(); }
 int agregarnuevolibro::getAño() const { return ui->anioLibro->date().year(); }
+QString agregarnuevolibro::getIsbn() const { return ui->campoIsbn->text(); }
 int agregarnuevolibro::getStock() const { return ui->campoStock->value(); }
 
 void agregarnuevolibro::on_botonAceptar_clicked()
@@ -30,12 +32,14 @@ void agregarnuevolibro::on_botonAceptar_clicked()
     // Obtener los valores de los campos
     QString titulo = ui->campoTitulo->text();
     QString autor = ui->campoAutor->text();
+    QString genero = ui->campoGenero->text();
     QString editorial = ui->campoEditorial->text();
     int año = ui->anioLibro->date().year();
+    QString isbn = ui->campoIsbn->text();
     int stock = ui->campoStock->value();
 
     // Validar que todos los campos estén completos
-    if (titulo.isEmpty() || autor.isEmpty() || editorial.isEmpty()) {
+    if (titulo.isEmpty() || autor.isEmpty() || genero.isEmpty() || editorial.isEmpty() || isbn.isEmpty()) {
         // Mostrar mensaje de error si algún campo está vacío
         QMessageBox::warning(this, "Error", "Todos los campos son obligatorios.");
         return;  // No continuar, ya que hay un error
@@ -62,11 +66,15 @@ void agregarnuevolibro::on_botonCancelar_clicked()
     // Cerrar el diálogo sin hacer nada
     reject();
 }
-void agregarnuevolibro::cargarDatos(const QString &titulo, const QString &autor, const QString &editorial, int año, int stock)
+void agregarnuevolibro::cargarDatos(const QString &titulo, const QString &autor, const QString &genero, const QString &editorial, const QDate &año, const QString &isbn, int stock)
 {
     ui->campoTitulo->setText(titulo);
     ui->campoAutor->setText(autor);
-    ui->campoEditorial->setText(editorial);
-    ui->anioLibro->setDate(QDate(año, 1, 1));
+    ui->campoGenero->setText(genero);
+    ui->campoEditorial->setText(editorial);   
+    ui->campoIsbn->setText(isbn);
     ui->campoStock->setValue(stock);
+
+    ui->anioLibro->setDisplayFormat("dd/mm/yyyy");
+    ui->anioLibro->setDate(QDate(año));
 }
